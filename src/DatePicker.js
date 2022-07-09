@@ -6,14 +6,15 @@ import './DatePicker.css';
 
 function DatePicker() {
 
-  const [ date, setDate ] = useState(null);
+  const today = new Date().toLocaleDateString()
+  const [ date, setDate ] = useState(today);
 
   const schedule = () => {
     console.log(date)
   }
 
   const cancel = () => {
-    setDate(null)
+    setDate(today)
   }
 
   return (

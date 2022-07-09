@@ -103,6 +103,7 @@ td:active{
 
 .TimerScroll li{
   list-style-type: none;
+  margin-top: 5px;
 }
 
 .CalendarHead {
