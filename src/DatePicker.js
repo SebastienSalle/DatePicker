@@ -6,11 +6,14 @@ import './DatePicker.css';
 
 function DatePicker() {
 
-  const [ date, setDate ] = useState(Date.now);
-
+  const [ date, setDate ] = useState(null);
 
   const schedule = () => {
     console.log(date)
+  }
+
+  const cancel = () => {
+    setDate(null)
   }
 
   return (
@@ -26,8 +29,8 @@ function DatePicker() {
         </div>
       </div>
       <div className="Picker-footer">
-      <button className='main' onClick={()=>{schedule()}}>Schedule</button>
-      <button>Cancel</button>
+      <button className='main' onClick={()=>schedule()}>Schedule</button>
+      <button onClick={()=>{cancel()}}>Cancel</button>
       </div>
     </div>
   );
