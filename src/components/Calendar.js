@@ -2,14 +2,17 @@ import '../DatePicker.css';
 
 function Calendar() {
 
+    const today = new Date().toLocaleDateString()
+    const month = new Date().toLocaleString('default', {month:'long'})
+
     return(
         <div>
             <div className="CalendarHead">
                 Date
-                <input value='09/07/2022' />
+                <input value={today} />
             </div>
             <div className='CalendarMonth'>
-                July
+                {month}
             </div>
             <div>
                 <table>
