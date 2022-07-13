@@ -1,59 +1,136 @@
-.DatePicker {
-  text-align: left;
-  background-color: white;
-  border-radius: 5px;
-  box-shadow: 0px 0px 25px grey;
-  color: darkgrey;
-  min-height: 30vh;
+#Container {
   display: flex;
   flex-direction: column;
-  align-items: start;
-  justify-content: center;
-  font-size: calc(5px + 2vmin);
-  padding: 20px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  font-size: calc(10px + 1vmin);
+  background-color: white;
+  color: #333333;
+  border-radius: 5px;
+  width: 90%;
+  max-width: 400px;
+  min-width: 230px;
+  padding: 10px;
+  margin: 50px;
+  box-shadow: 0px 0px 25px grey;
 }
 
 .Picker-header {
   color: #62676D
 }
 
+h2 {
+  font-size: 17px;
+  margin: 0px;
+}
+
+.small-Text {
+  font-size: 10px;
+}
+
+#date-Input, #timer-Input{
+  background-color: #e3e3e3;
+  border: none;
+  border-radius: 5px;
+  width: 100px;
+  height: 25px;
+  text-align: center;
+  font-weight: bolder;
+  margin: 5px;
+}
+
 .Picker-body {
   color: #62676D;
   display:flex;
   flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  ;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 100%;
+  overflow-x: scroll;
 }
 
-.Picker-footer {
+#Calendar {
   display:flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  height:300px;
+}
+
+.Cal-Header {
+  display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  width: 220px;
 }
 
-button{
-  margin:10px 5px 5px 0px;
-  border-radius: 10px;
-  border: 1px solid lightgrey;
-  padding: 15px;
-  background-color: white;
-  color: #62676D;
+h3 {
+  color: #4780f7;
+  font-size: 15px;
 }
 
-button.main{
-  background-color: #4780F7;
+.Arrows {
+  color: #a3a3a3;
+  font-size: smaller;
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+#left, #right {
+  margin-left: 10px;
+  width:20px;
+  height:20px;
+  padding: 5px;
+}
+
+#left:hover, 
+#right:hover {
+  background-color: #b3b3b3;
   color: white;
-  border-width: 0px;
+  border-radius: 50%;
 }
 
-button:hover{
-  box-shadow: 0px 0px 5px grey;
+.Cal-Body {
+  display: flex;
+  flex-direction: column;
+  align-items: space-around;
+  justify-content: center;
 }
 
-button:active{
-  box-shadow: 0px 0px 5px grey;
+.Cal-Body th{
+  background-color:white;
+  min-width: 25px;
+  min-height: 25px;
+  height: 25px;
+}
+
+thead{
+  border-bottom: solid 1px black;
+}
+
+.Cal-Body td{
+  background-color:white;
+  min-width: 25px;
+  min-height: 25px;
+  height: 25px;
+  cursor: pointer;
+  text-align: center;
+  
+}
+
+.Cal-Body td:hover{
+  border-radius: 5px;
+  background-color: #e3e3e3;
+  color: black;
+  font-weight: bolder;
+}
+
+.Cal-Body td:active{
+  border-radius: 50%;
+  background-color: #a3a3a3;
+  color: white;
+  font-weight: bolder;
 }
 
 table{
@@ -81,49 +158,71 @@ td:active{
   font-weight: bolder;
 }
 
-.TimerHead{
+td.today{
+  border-radius: 50%;
+  background-color: #4780f7;
+  color: orange;
+  font-weight: bolder;
+}
+
+td.today:hover{
+  border-radius: 50%;
+  background-color: orange;
+  color:#4780f7;
+  font-weight: bolder;
+}
+
+td.selected{
+  border-radius: 5px;
+  background-color: #a3a3a3;
+  color: white;
+  font-weight: bolder;
+}
+
+td.selected:hover{
+  background-color:#a3a3a3;
+}
+
+td.out{
+  border-radius: 5px;
+  color: #a3a3a3;
+  font-weight: lighter;
+}
+
+td.out:hover{
+  border-radius: 5px;
+  color: black;
+  font-weight: lighter;
+}
+
+.Picker-footer {
   display: flex;
   flex-direction: row;
-  align-items: center;
-  font-size: smaller
+  align-items: flex-end;
+  justify-content: center;
+  min-height: 70px;
 }
 
-.TimerHead input{
-  width: 100px;
+button {
+  color: #62676D;
+  background-color: #e3e3e3;
   border: none;
   border-radius: 5px;
-  background-color: #e3e3e3;
-  padding-left: 10px;
-  margin-left: 5px;
+  padding: 5px;
+  margin:5px 5px 5px 0px;
+  height: 35px;
+  min-width: 90px;
 }
 
-.TimerScroll{
-  display: flex;
+button:hover{
+  box-shadow: 0px 0px 5px grey;
 }
 
-.TimerScroll li{
-  list-style-type: none;
-  margin-top: 5px;
+button:active {
+  box-shadow: none;
 }
 
-.CalendarHead {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  width:auto;
-  font-size: smaller
-}
-
-.CalendarHead input{
-  width: 100px;
-  border: none;
-  border-radius: 5px;
-  background-color: #e3e3e3;
-  padding-left: 10px;
-  margin-left: 5px;
-}
-
-.CalendarMonth {
-  color: #4780F7;
-  font-weight: bolder
+.blueButton{
+  background-color: #4780F7;
+  color: white;
 }
