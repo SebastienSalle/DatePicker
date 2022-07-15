@@ -1,16 +1,18 @@
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import {
   settingTime,
 } from "../redux/scheduling";
 
-import '../DatePicker.css';
+import './DatePicker.css';
 import './Timer.css';
 
 function Timer() {
     const dispatch = useDispatch();
 
-    const [selectTime, setSelectTime] = useState(new Date().toLocaleString('default', {hour:'2-digit', minute:'2-digit', hourCycle:'h12'}))
+    const timeToSchedule = useSelector((state) => state.scheduling.timeToSchedule);
+
+    const [selectTime, setSelectTime] = useState(undefined)
 
     const handleTimeClick = (data) => {
         setSelectTime(data)
@@ -40,11 +42,18 @@ function Timer() {
         )
     };
 
+      useEffect(() => {
+        timeToSchedule
+        ? setSelectTime(timeToSchedule) 
+        : setSelectTime(new Date().toLocaleString('default', {hour:'2-digit', minute:'2-digit', hourCycle:'h12'}))
+
+  }, [timeToSchedule]);
+
     return(
         <div id='Timer'>
             <div id='timer-Head'>
                 <span className="small-Text">Time</span>
-                <input id='timer-Input' format="hh:mm" value={selectTime} onChange={(e)=>{console.log(e.target.value)}}></input>
+                <input id='timer-Input' format="hh:mm" defaultValue={selectTime} readOnly onChange={(e)=>{console.log(e.target.value)}}></input>
             </div>
             <div id='timer-Scroll'>
                 {timeList}  

@@ -3,8 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 export const scheduleSlice = createSlice({
     name: "scheduling",
     initialState: {
-        dateToSchedule: '',
-        timeToSchedule: '',
+        dateToSchedule: undefined,
+        timeToSchedule: undefined,
         // timeToSchedule: new Date().toLocaleString('default', {hour:'2-digit', minute:'2-digit', hourCycle:'h12'}),
     },
     reducers: {
@@ -16,6 +16,7 @@ export const scheduleSlice = createSlice({
         },
         canceling: (state) => {
             state.dateToSchedule = new Date().toLocaleDateString();
+            state.timeToSchedule = undefined;
         },
     },
 });

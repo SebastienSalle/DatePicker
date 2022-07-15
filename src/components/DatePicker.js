@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   settingDate,
   canceling
-} from "./redux/scheduling";
+} from "../redux/scheduling";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -11,8 +11,7 @@ import {
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
 
-import Calendar from "./components/Calendar";
-import Timer from "./components/Timer";
+import Timer from "./Timer";
 
 import "./DatePicker.css";
 
@@ -21,19 +20,13 @@ function DatePicker() {
   const dateToSchedule = useSelector((state) => state.scheduling.dateToSchedule)
   const timeToSchedule = useSelector((state) => state.scheduling.timeToSchedule)
 
-
   const today = new Date();
   const fullToday = today.toLocaleDateString();
-  const monthNum = new Date().toLocaleString("default", { month: "2-digit" });
 
   const [displayedYear, setDisplayedYear] = useState(today.getFullYear());
   const [baseMonth, setBaseMonth] = useState(new Date().getMonth());
-  //console.log('Base', baseMonth)
   
   const [displayedDate, setDiplayedDate] = useState(fullToday);
-
-  const yearNum = today.getFullYear();
-  //console.log('YEAR ', yearNum+1)
 
   const handlePrevMonth = () => {
     let month = Number(baseMonth);
@@ -71,29 +64,24 @@ function DatePicker() {
   const handleSchedule = () => {
     console.log("rdv le ", displayedDate);
     alert(
-        `Votre rendez-vous est prévu le ${dateToSchedule} à ${timeToSchedule}`
+        dateToSchedule && timeToSchedule
+          ? `Votre rendez-vous est prévu le ${ dateToSchedule} à ${timeToSchedule} \n Your appointment will be on ${dateToSchedule} at ${timeToSchedule}`
+          : `Vous devez choisir une date et un créneau horaire \n You need to pick a date and a time range`
       );
     };
     
-    // `Votre rendez-vous est prévu le ${dateToSchedule} à ${timeToSchedule}`
   //-------
+  // Preparing Calendar table
 
   const firstDay = new Date(displayedYear, baseMonth, 1);
 
   const lastDay = new Date(displayedYear, baseMonth + 1, 0);
 
   const monthLength = lastDay.getDate();
-  console.log(
-    "---Il y a ",
-    monthLength,
-    " jours au mois de",
-    firstDay.toLocaleString("default", { month: "long" })
-  );
 
   // Fill in the first week with previous month last days
   const firstRow = [];
   for (let i = 0; firstDay.getDay() - i > 0; i++) {
-    //firstRow.unshift(new Date(displayedYear, baseMonth, -i))
     firstRow.unshift(new Date(displayedYear, baseMonth, -i));
   }
 
@@ -105,7 +93,6 @@ function DatePicker() {
     monthDays.push(new Date(displayedYear, baseMonth, i + 1));
     i++;
   }
-  // console.log(monthDays)
 
   // 2. THEN COMPLETE THE 1ST WEEK
   if (firstRow.length <= 7) {
@@ -175,7 +162,7 @@ function DatePicker() {
   }
 
   // ---- TABLE HEAD WITH DAY SHORTEN NAMES
-  //const weekDays = [ 'Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday' ];
+  // const weekDays = [ 'Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday' ];
   const weekDays = [
     "Dimanche",
     "Lundi",
@@ -194,15 +181,8 @@ function DatePicker() {
     const convertedValue = value.toLocaleDateString()
     setDiplayedDate(convertedValue);
     dispatch(settingDate(convertedValue))
-    console.log("AFTER DISP ",convertedValue)
   };
   
-  useEffect(() => {
-    
-    // dispatch(settingDate(fullToday))
-
-  },[]);
-
   // Dynamical style for cells
   const checkDayStyle = (value) => {
     switch (value.toLocaleString().slice(0, 10)) {
@@ -229,104 +209,98 @@ function DatePicker() {
         <tbody>
           {firstRow.length !== 0 && (
             <tr id="firstRow">
-              {" "}
               {firstRow.map(
                 (cell, i) =>
                   cell && (
                     <td
-                      id={"1-" + { i }}
+                      key={`r1-${ i }`}
                       className={checkDayStyle(cell)}
                       onClick={() => handleDayClick(cell)}
                     >
                       {cell.getDate()}
                     </td>
                   )
-              )}{" "}
+              )}
             </tr>
           )}
           {secondRow.length !== 0 && (
             <tr id="secondRow">
-              {" "}
               {secondRow.map(
                 (cell, i) =>
                   cell && (
                     <td
-                      id={"2-" + { i }}
+                      key={`r2-${ i }`}
                       className={checkDayStyle(cell)}
                       onClick={() => handleDayClick(cell)}
                     >
                       {cell.getDate()}
                     </td>
                   )
-              )}{" "}
+              )}
             </tr>
           )}
           {thirdRow.length !== 0 && (
             <tr id="thirdRow">
-              {" "}
               {thirdRow.map(
                 (cell, i) =>
                   cell && (
                     <td
-                      id={"3-" + { i }}
+                      key={`r3-${ i }`}
                       className={checkDayStyle(cell)}
                       onClick={() => handleDayClick(cell)}
                     >
                       {cell.getDate()}
                     </td>
                   )
-              )}{" "}
+              )}
             </tr>
           )}
           {fourthRow.length !== 0 && (
             <tr id="fourthRow">
-              {" "}
               {fourthRow.map(
                 (cell, i) =>
                   cell && (
                     <td
-                      id={"4-" + { i }}
+                      key={`r4-${ i }`}
                       className={checkDayStyle(cell)}
                       onClick={() => handleDayClick(cell)}
                     >
                       {cell.getDate()}
                     </td>
                   )
-              )}{" "}
+              )}
             </tr>
           )}
           {fifthRow.length !== 0 && (
             <tr id="fifthRow">
-              {" "}
               {fifthRow.map(
                 (cell, i) =>
                   cell && (
                     <td
-                      id={"5-" + { i }}
+                      key={`r5-${ i }`}
                       className={checkDayStyle(cell)}
                       onClick={() => handleDayClick(cell)}
                     >
                       {cell.getDate()}
                     </td>
                   )
-              )}{" "}
+              )}
             </tr>
           )}
           {lastRow.length !== 0 && (
             <tr id="lastRow">
-              {" "}
               {lastRow.map(
                 (cell, i) =>
                   cell && (
                     <td
-                      id={"6-" + { i }}
+                      key={`r6-${ i }`}
                       className={checkDayStyle(cell)}
                       onClick={() => handleDayClick(cell)}
                     >
                       {cell.getDate()}
                     </td>
                   )
-              )}{" "}
+              )}
             </tr>
           )}
         </tbody>
@@ -347,7 +321,7 @@ function DatePicker() {
           <input
             id="date-Input"
             readOnly
-            value={displayedDate}
+            defaultValue={displayedDate}
             onChange={(e) => {
               console.log(e.target.value);
             }}
